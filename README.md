@@ -27,7 +27,7 @@ f.line(year, engg)
 #Output
 show(f)
 
--
+--------------------------------------------
 #Plot Properties
 import pandas
 from bokeh.plotting import figure, output_file, show
@@ -47,4 +47,33 @@ p.line([1,2,3],[4,5,6])
 output_file("graph.html")
 show(p)
 
--
+-----------------------------------------
+#Weather Plotting
+from bokeh.plotting import figure
+from bokeh.io import output_file, show
+import pandas
+
+df = pandas.read_excel("some.xlsx")
+
+Temp = df["Temperature"]
+Pres = df["Pressure"]
+
+f = figure(plot_width = 500, plot_height = 500, tools = 'pan')
+
+f.title.text = "Temperature And Air Pressure"
+f.title.text_color = "Gray"
+f.title.text_font = "Times"
+f.title.text_font_style = "bold"
+f.title.text_font_size = '16pt'
+f.xaxis.minor_tick_line_color = "Blue"
+f.yaxis.minor_tick_line_color = "Blue"
+f.xaxis.axis_label = "Temperature(°C)"
+f.yaxis.axis_label = "Pressure(hPa)"
+
+
+f.circle(Temp/10, Pres/10, size = 0.5)
+
+output_file("graph.html")
+show(f)
+
+------------------------------------------
